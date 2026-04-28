@@ -3,12 +3,12 @@ from PIL import Image, ImageTk
 import newUser
 
 myroot = Tk()
-myroot.geometry("700x400+400+100")
-myroot.title("Kamal")
+myroot.geometry("800x400+400+100")
+myroot.title("Python-Interface")
 
 # Background Image
-bg_image = Image.open("images/new1.jpg")
-bg_image = bg_image.resize((700, 400), Image.LANCZOS)
+bg_image = Image.open("images/Login.jpg")
+bg_image = bg_image.resize((800, 400), Image.LANCZOS)
 bg_photo = ImageTk.PhotoImage(bg_image)
 
 bg_label = Label(myroot, image=bg_photo)
@@ -17,7 +17,7 @@ bg_label.image = bg_photo
 
 # ------- Login Frame ---------
 login_frame = Frame(myroot, bg='white', width=400, height=250)
-login_frame.place(x=150, y=75)
+login_frame.place(x=190, y=75)
 
 # Heading
 login_heading = Label(login_frame, text="C-Panel", font=("times new roman", 24, "bold"), bg="white")
