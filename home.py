@@ -17,7 +17,7 @@ bg_label.image = bg_photo
 
 # ------- Login Frame ---------
 
-# Shadow (fake shadow effect)
+# Shadow effect
 shadow_frame = Frame(myroot, bg="#cfcfcf")
 shadow_frame.place(x=195, y=80, width=400, height=260)
 
