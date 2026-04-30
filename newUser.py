@@ -106,7 +106,10 @@ def signup(root):
                                 messagebox.showerror("Error","Address is required")
                             else:
                                 try:
-                                    #--env content
+                                    mydb=mysql.connector.connect(host="localhost",user="root",password="Kamal@1224",database="Python_GuiDb")
+                                    mycursor=mydb.cursor()
+                                    q=f"""insert into newuser(name,email,password,gender,state,address)
+                                         values('{name}','{email}','{password}','{gender}','{state}','{address}')"""
                                     mycursor.execute(q)
                                     mydb.commit()
                                     messagebox.showinfo("Success","Account Created Successfully")
