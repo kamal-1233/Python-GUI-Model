@@ -1,6 +1,9 @@
 from tkinter import *
 from PIL import Image, ImageTk
+from tkinter import messagebox
 import newUser
+import mysql.connector
+import Dashboard
 
 myroot = Tk()
 myroot.geometry("800x400+400+100")
@@ -49,6 +52,54 @@ password_label.place(x=40, y=130)
 password_entry = Entry(login_frame, font=("Segoe UI", 12), width=25, bd=1, relief="solid", show="*")
 password_entry.place(x=40, y=155)
 
+def Logic_check():
+    email = email_entry.get().strip()
+    password = password_entry.get().strip()
+
+    # Validation
+    if email == "":
+        messagebox.showerror("Error", "Please enter email")
+        return
+
+    if "@" not in email or "." not in email:
+        messagebox.showerror("Error", "Invalid email format")
+        return
+
+    if password == "":
+        messagebox.showerror("Error", "Please enter password")
+        return
+
+    try:
+        mydb = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="Kamal@1224",
+            database="Python_GuiDb"
+        )
+
+        mycursor = mydb.cursor()
+
+        q = "SELECT * FROM newuser WHERE email=%s AND password=%s"
+        mycursor.execute(q, (email, password))
+
+        data = mycursor.fetchone()
+        if data:
+            messagebox.showinfo("Success", "Login Successful ✅")
+
+            username = data[1]   # name column
+            user_email = data[2] # email column
+
+            Dashboard.welcome_window(myroot, username, user_email)
+        else:
+            messagebox.showerror("Error", "Invalid Email or Password")        
+
+        mycursor.close()
+        mydb.close()
+
+    except Exception as e:
+        messagebox.showerror("Database Error", str(e))
+     
+
 # Login Button
 login_button = Button(
     login_frame,
@@ -58,6 +109,7 @@ login_button = Button(
     fg="white",
     activebackground="#357ABD",
     cursor="hand2",
+    command=Logic_check,
     bd=0,
     width=12
 )
