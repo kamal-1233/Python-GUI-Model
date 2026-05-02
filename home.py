@@ -88,6 +88,9 @@ def Logic_check():
 
             username = data[1]   # name column
             user_email = data[2] # email column
+            password_entry.delete(0,END)
+            email_entry.delete(0,END)
+            
 
             Dashboard.welcome_window(myroot, username, user_email)
         else:
